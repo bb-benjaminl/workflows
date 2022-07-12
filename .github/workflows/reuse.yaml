@@ -1,0 +1,29 @@
+name: "Reuse"
+
+on:
+  workflow_call:
+    inputs:
+      chart-directory:
+        description: 'Path to the Helm Chart'
+        required: true
+        type: string
+      remote-registry:
+        description: 'URL of Helm Registry, excluding protocol (oci:// will be used)'
+        required: true
+        type: string
+      strip-chart-lock:
+        description: 'Remove the Chart.lock from the final packaged tarball'
+        required: false
+        type: boolean
+        default: true
+
+jobs:
+  publish_charts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Publish Chart"
+        id: publish
+        run: |
+          echo "chart-directory: ${{inputs.chart-directory}}"
+          echo "remote-registry: ${{inputs.remote-registry}}"
+          echo "strip-chart-lock: ${{inputs.strip-chart-lock}}"
