@@ -27,3 +27,8 @@ jobs:
           echo "chart-directory: ${{inputs.chart-directory}}"
           echo "remote-registry: ${{inputs.remote-registry}}"
           echo "strip-chart-lock: ${{inputs.strip-chart-lock}}"
+
+          if [ "${{inputs.strip-chart-lock}}" = "false" ]; then
+            echo 'Oh no'
+            exit 1
+          fi
